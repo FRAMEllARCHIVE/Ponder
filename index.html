@@ -23,7 +23,7 @@
     <p id="y-value">Y: Loading...</p>
     <p id="z-value">Z: Loading...</p>
 
-    <!-- Add a button to enter fullscreen -->
+    <!-- Add a button to enter fullscreen and lock screen orientation -->
     <button id="fullscreen-button">Enter Fullscreen</button>
 
     <script>
@@ -36,14 +36,24 @@
             document.getElementById('z-value').textContent = `Z: ${z}`;
         }
 
-        function enterFullscreen() {
+        function enterFullscreenAndLockOrientation() {
             // Check if the browser supports fullscreen API
             if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
+                document.documentElement.requestFullscreen().then(() => {
+                    // Lock the screen orientation to landscape
+                    if (screen.orientation.lock) {
+                        screen.orientation.lock("landscape");
+                    }
+                });
             } else if (document.documentElement.mozRequestFullScreen) { // Firefox
                 document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                document.documentElement.webkitRequestFullscreen().then(() => {
+                    // Lock the screen orientation to landscape
+                    if (screen.orientation.lock) {
+                        screen.orientation.lock("landscape");
+                    }
+                });
             } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
                 document.documentElement.msRequestFullscreen();
             }
@@ -53,7 +63,7 @@
             window.addEventListener('devicemotion', updateAccelerometerData);
 
             // Add a click event listener to the fullscreen button
-            document.getElementById('fullscreen-button').addEventListener('click', enterFullscreen);
+            document.getElementById('fullscreen-button').addEventListener('click', enterFullscreenAndLockOrientation);
         } else {
             // Browser does not support accelerometer
             document.getElementById('x-value').textContent = 'X: Not supported';
