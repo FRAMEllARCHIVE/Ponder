@@ -23,6 +23,9 @@
     <p id="y-value">Y: Loading...</p>
     <p id="z-value">Z: Loading...</p>
 
+    <!-- Add a button to enter fullscreen -->
+    <button id="fullscreen-button">Enter Fullscreen</button>
+
     <script>
         function updateAccelerometerData(event) {
             const x = event.acceleration.x.toFixed(2);
@@ -33,16 +36,32 @@
             document.getElementById('z-value').textContent = `Z: ${z}`;
         }
 
+        function enterFullscreen() {
+            // Check if the browser supports fullscreen API
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+                document.documentElement.msRequestFullscreen();
+            }
+        }
+
         if (window.DeviceOrientationEvent) {
             window.addEventListener('devicemotion', updateAccelerometerData);
 
-            // Request fullscreen when the event listener is added
-            document.documentElement.requestFullscreen();
+            // Add a click event listener to the fullscreen button
+            document.getElementById('fullscreen-button').addEventListener('click', enterFullscreen);
         } else {
             // Browser does not support accelerometer
             document.getElementById('x-value').textContent = 'X: Not supported';
             document.getElementById('y-value').textContent = 'Y: Not supported';
             document.getElementById('z-value').textContent = 'Z: Not supported';
+
+            // Disable the fullscreen button if the accelerometer is not supported
+            document.getElementById('fullscreen-button').disabled = true;
         }
     </script>
 </body>
