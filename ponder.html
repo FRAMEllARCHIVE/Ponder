@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accelerometer App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Accelerometer Data</h1>
+    <p id="x-value">X: Loading...</p>
+    <p id="y-value">Y: Loading...</p>
+    <p id="z-value">Z: Loading...</p>
+
+    <script>
+        // Function to update accelerometer data
+        function updateAccelerometerData(event) {
+            // Get accelerometer data
+            const x = event.acceleration.x.toFixed(2);
+            const y = event.acceleration.y.toFixed(2);
+            const z = event.acceleration.z.toFixed(2);
+
+            // Display accelerometer data
+            document.getElementById('x-value').textContent = `X: ${x}`;
+            document.getElementById('y-value').textContent = `Y: ${y}`;
+            document.getElementById('z-value').textContent = `Z: ${z}`;
+        }
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('devicemotion', updateAccelerometerData);
+        } else {
+            // Browser does not support accelerometer
+            document.getElementById('x-value').textContent = 'X: Not supported';
+            document.getElementById('y-value').textContent = 'Y: Not supported';
+            document.getElementById('z-value').textContent = 'Z: Not supported';
+        }
+    </script>
+</body>
+</html>
