@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accelerometer App</title>
+    <title>Ponder</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -37,40 +37,32 @@
         }
 
         function enterFullscreenAndLockOrientation() {
-            // Check if the browser supports fullscreen API
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen().then(() => {
-                    // Lock the screen orientation to landscape
                     if (screen.orientation.lock) {
                         screen.orientation.lock("landscape");
                     }
                 });
-            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
+            } else if (document.documentElement.mozRequestFullScreen) {
                 document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            } else if (document.documentElement.webkitRequestFullscreen) {
                 document.documentElement.webkitRequestFullscreen().then(() => {
-                    // Lock the screen orientation to landscape
                     if (screen.orientation.lock) {
                         screen.orientation.lock("landscape");
                     }
                 });
-            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
+            } else if (document.documentElement.msRequestFullscreen) {
                 document.documentElement.msRequestFullscreen();
             }
         }
 
         if (window.DeviceOrientationEvent) {
             window.addEventListener('devicemotion', updateAccelerometerData);
-
-            // Add a click event listener to the fullscreen button
             document.getElementById('fullscreen-button').addEventListener('click', enterFullscreenAndLockOrientation);
         } else {
-            // Browser does not support accelerometer
             document.getElementById('x-value').textContent = 'X: Not supported';
             document.getElementById('y-value').textContent = 'Y: Not supported';
             document.getElementById('z-value').textContent = 'Z: Not supported';
-
-            // Disable the fullscreen button if the accelerometer is not supported
             document.getElementById('fullscreen-button').disabled = true;
         }
     </script>
