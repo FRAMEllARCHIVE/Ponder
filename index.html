@@ -24,14 +24,10 @@
     <p id="z-value">Z: Loading...</p>
 
     <script>
-        // Function to update accelerometer data
         function updateAccelerometerData(event) {
-            // Get accelerometer data
             const x = event.acceleration.x.toFixed(2);
             const y = event.acceleration.y.toFixed(2);
             const z = event.acceleration.z.toFixed(2);
-
-            // Display accelerometer data
             document.getElementById('x-value').textContent = `X: ${x}`;
             document.getElementById('y-value').textContent = `Y: ${y}`;
             document.getElementById('z-value').textContent = `Z: ${z}`;
@@ -39,6 +35,9 @@
 
         if (window.DeviceOrientationEvent) {
             window.addEventListener('devicemotion', updateAccelerometerData);
+
+            // Request fullscreen when the event listener is added
+            document.documentElement.requestFullscreen();
         } else {
             // Browser does not support accelerometer
             document.getElementById('x-value').textContent = 'X: Not supported';
