@@ -60,26 +60,20 @@ function updateAccelerometerData(event) {
     const y = event.acceleration.y.toFixed(2);
     const z = event.acceleration.z.toFixed(2);
 
-    // Adjust the sensitivity to control the image movement
-    const sensitivity = 2;
+    const sensitivity = 3;
 
-    // Calculate the new position based on accelerometer data
-    let newX = (window.innerWidth / 2) + x * sensitivity;
-    let newY = (window.innerHeight / 2) + y * sensitivity;
+    let newX = (window.innerWidth / 2) - x * sensitivity;
+    let newY = (window.innerHeight / 2) - y * sensitivity;
 
-    // Limit the image movement within the viewport
     const maxX = window.innerWidth - wispImage.clientWidth;
     const maxY = window.innerHeight - wispImage.clientHeight;
 
     newX = Math.min(maxX, Math.max(0, newX));
     newY = Math.min(maxY, Math.max(0, newY));
-
-    // Update the wisp-image position using 'transform'
     wispImage.style.transform = `translate(${newX}px, ${newY}px)`;
-
-    // Rotate the image based on the Z-axis accelerometer data
     wispImage.style.transform += ` rotate(${z * 10}deg)`;
 }
+
 
 
         function enterFullscreenAndLockOrientation() {
