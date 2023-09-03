@@ -61,7 +61,7 @@ function updateAccelerometerData(event) {
     const z = event.acceleration.z.toFixed(2);
 
     // Adjust the sensitivity to control the image movement
-    const sensitivity = 10;
+    const sensitivity = 2;
 
     // Calculate the new position based on accelerometer data
     let newX = (window.innerWidth / 2) + x * sensitivity;
