@@ -6,8 +6,15 @@
     <title>PONDER</title>
     <style>
         body {
+            background-color: black;
+            background-image: url('assets/menu.gif');
+            background-size: 50%;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center center;
             font-family: Arial, sans-serif;
             text-align: center;
+            color: white;
         }
         h1 {
             font-size: 44px;
@@ -15,16 +22,36 @@
         p {
             font-size: 22px;
         }
+        #centered-content {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        #fullscreen-button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #centered-image {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+        }
     </style>
 </head>
 <body>
-    <h1>PONDER</h1>
-    <p id="x-value">X: Loading...</p>
-    <p id="y-value">Y: Loading...</p>
-    <p id="z-value">Z: Loading...</p>
+    <div id="centered-content">
+        <h1>PONDER</h1>
+        <p id="x-value">X: Loading...</p>
+        <p id="y-value">Y: Loading...</p>
+        <p id="z-value">Z: Loading...</p>
 
-    <!-- Add a button to enter fullscreen and lock screen orientation -->
-    <button id="fullscreen-button">PLEASE ADJUST SCREEN TO LANDSCAPE</button>
+        <button id="fullscreen-button">START</button>
+    </div>
 
     <script>
         function updateAccelerometerData(event) {
