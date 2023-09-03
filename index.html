@@ -7,7 +7,7 @@
     <style>
         body {
             background-color: black;
-            background-image: url('assets/menu.gif');
+            background-image: url('assets/menu3.gif');
             background-size: 50%;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -27,6 +27,7 @@
             padding: 30px;
             border-radius: 10px;
             display: inline-block;
+            transform: translateY(111px);
         }
         #fullscreen-button {
             background-color: #3498db;
@@ -46,11 +47,11 @@
 <body>
     <div id="centered-content">
         <h1>PONDER</h1>
-        <p id="x-value">X: Loading...</p>
-        <p id="y-value">Y: Loading...</p>
+        <p id="x-value">X: NEW GAME</p>
+        <p id="y-value">Y: CONTINUE</p>
         <p id="z-value">Z: Loading...</p>
-
         <button id="fullscreen-button">START</button>
+        <img id="wisp-image" src="assets/wisp.png" alt="Wisp Image">
     </div>
 
     <script>
@@ -61,6 +62,11 @@
             document.getElementById('x-value').textContent = `X: ${x}`;
             document.getElementById('y-value').textContent = `Y: ${y}`;
             document.getElementById('z-value').textContent = `Z: ${z}`;
+            const wispImage = document.getElementById('wisp-image');
+            const moveFactor = 10;ed
+            const newX = (window.innerWidth / 2) + x * moveFactor;
+            const newY = (window.innerHeight / 2) + y * moveFactor;
+            wispImage.style.transform = `translate(${newX}px, ${newY}px)`;
         }
 
         function enterFullscreenAndLockOrientation() {
