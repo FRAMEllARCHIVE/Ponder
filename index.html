@@ -64,9 +64,23 @@
             document.getElementById('z-value').textContent = `Z: ${z}`;
             const wispImage = document.getElementById('wisp-image');
             const moveFactor = 3;
-            const newX = (window.innerWidth / 2) + x * moveFactor;
-            const newY = (window.innerHeight / 2) + y * moveFactor;
-            wispImage.style.transform = `translate(${newX}px, ${newY}px)`; // Use 'translate' for both X and Y
+
+            // Define boundaries for the movement (adjust these values as needed)
+            const minX = 0;
+            const maxX = window.innerWidth - wispImage.clientWidth;
+            const minY = 0;
+            const maxY = window.innerHeight - wispImage.clientHeight;
+
+            // Calculate the new position based on accelerometer data
+            let newX = (window.innerWidth / 2) + x * moveFactor;
+            let newY = (window.innerHeight / 2) + y * moveFactor;
+
+            // Ensure the wisp-image stays within the defined boundaries
+            newX = Math.min(maxX, Math.max(minX, newX));
+            newY = Math.min(maxY, Math.max(minY, newY));
+
+            // Update the wisp-image position using 'transform'
+            wispImage.style.transform = `translate(${newX}px, ${newY}px)`;
         }
 
         function enterFullscreenAndLockOrientation() {
