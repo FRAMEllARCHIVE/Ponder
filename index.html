@@ -64,7 +64,7 @@
             document.getElementById('y-value').textContent = `Y: ${y}`;
             document.getElementById('z-value').textContent = `Z: ${z}`;
             const wispImage = document.getElementById('wisp-image');
-            const moveFactor = 5;
+            const moveFactor = 0.5;
             const newX = (window.innerWidth / 2) + x * moveFactor;
             wispImage.style.transform = `translateX(${newX}px)`;
             const newY = (window.innerHeight / 2) + y * moveFactor;
