@@ -65,9 +65,8 @@
             const wispImage = document.getElementById('wisp-image');
             const moveFactor = 3;
             const newX = (window.innerWidth / 2) + x * moveFactor;
-            wispImage.style.transform = `translateX(${newX}px)`;
             const newY = (window.innerHeight / 2) + y * moveFactor;
-            wispImage.style.transformY = `translateY(${newY}px)`;
+            wispImage.style.transform = `translate(${newX}px, ${newY}px)`; // Use 'translate' for both X and Y
         }
 
         function enterFullscreenAndLockOrientation() {
