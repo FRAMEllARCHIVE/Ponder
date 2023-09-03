@@ -47,34 +47,33 @@
 <body>
     <div id="centered-content">
         <h1>PONDER</h1>
-        <p id="x-value">UP:</p>
-        <p id="y-value">EAST:</p>
-        <p id="z-value">JUMP:</p>
+        <p id="x-value">X:</p>
+        <p id="y-value">Y:</p>
+        <p id="z-value">Z:</p>
         <button id="fullscreen-button">START</button>
         <img id="wisp-image" src="assets/wisp.gif" alt="Wisp Image" style="width: 40%;">
     </div>
 
     <script>
-function updateAccelerometerData(event) {
-    const x = event.acceleration.x.toFixed(2);
-    const y = event.acceleration.y.toFixed(2);
-    const z = event.acceleration.z.toFixed(2);
+        function updateAccelerometerData(event) {
+            const wispImage = document.getElementById('wisp-image');
+            const x = event.acceleration.x.toFixed(2);
+            const y = event.acceleration.y.toFixed(2);
+            const z = event.acceleration.z.toFixed(2);
 
-    const sensitivity = 3;
+            const sensitivity = 3;
 
-    let newX = (window.innerWidth / 2) - x * sensitivity;
-    let newY = (window.innerHeight / 2) - y * sensitivity;
+            let newX = (window.innerWidth / 2) - x * sensitivity;
+            let newY = (window.innerHeight / 2) - y * sensitivity;
 
-    const maxX = window.innerWidth - wispImage.clientWidth;
-    const maxY = window.innerHeight - wispImage.clientHeight;
+            const maxX = window.innerWidth - wispImage.clientWidth;
+            const maxY = window.innerHeight - wispImage.clientHeight;
 
-    newX = Math.min(maxX, Math.max(0, newX));
-    newY = Math.min(maxY, Math.max(0, newY));
-    wispImage.style.transform = `translate(${newX}px, ${newY}px)`;
-    wispImage.style.transform += ` rotate(${z * 10}deg)`;
-}
-
-
+            newX = Math.min(maxX, Math.max(0, newX));
+            newY = Math.min(maxY, Math.max(0, newY));
+            wispImage.style.transform = `translate(${newX}px, ${newY}px)`;
+            wispImage.style.transform += ` rotate(${z * 10}deg)`;
+        }
 
         function enterFullscreenAndLockOrientation() {
             if (document.documentElement.requestFullscreen) {
