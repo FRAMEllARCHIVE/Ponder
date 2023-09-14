@@ -23,14 +23,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            background-color: black;
+            color: white;
+            text-align: center;
+            font-size: 66px;
             cursor: pointer;
+            font-family: sans-serif;
+            font-weight: bold;
+            line-height: 11;
         }
     </style>
 </head>
 <body>
     <img id="player" src="assets/wisp.gif" alt="Player">
-    <div id="fullscreen-button" onclick="toggleFullscreen()"></div>
+    <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER</div>
 
     <script>
         function toggleFullscreen() {
@@ -47,13 +53,15 @@
                     });
                 }
             }
+
+            document.getElementById('fullscreen-button').style.display = 'none';
         }
 
         window.addEventListener('deviceorientation', function(event) {
-            var x = event.beta; // Up/down
-            var y = event.gamma; // Left/right
+            var x = event.beta;
+            var y = event.gamma;
             var player = document.getElementById('player');
-            player.style.transform = `translate(${x}px, ${y}px)`;
+            player.style.transform = `translate(${y}px, ${x}px)`;
         });
     </script>
 </body>
