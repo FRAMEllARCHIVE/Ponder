@@ -15,6 +15,8 @@
         #player {
             position: absolute;
             width: 7%;
+            top: 92%;
+            left: 64%;
         }
         
         #fullscreen-button {
@@ -36,7 +38,7 @@
 </head>
 <body>
     <img id="player" src="assets/wisp.gif" alt="Player">
-    <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER1</div>
+    <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER2</div>
 
     <script>
         function toggleFullscreen() {
@@ -60,16 +62,11 @@
 window.addEventListener('deviceorientation', function(event) {
     var x = event.beta;
     var y = event.gamma;
-
-
     var movementSpeedX = x * 2;
     var movementSpeedY = y * 2;
-
     var player = document.getElementById('player');
-
     var newX = player.offsetLeft + movementSpeedX;
     var newY = player.offsetTop + movementSpeedY;
-
     player.style.left = newX + 'px';
     player.style.top = newY + 'px';
 });
