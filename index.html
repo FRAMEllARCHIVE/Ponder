@@ -57,12 +57,22 @@
             document.getElementById('fullscreen-button').style.display = 'none';
         }
 
-        window.addEventListener('deviceorientation', function(event) {
-            var x = event.beta;
-            var y = event.gamma;
-            var player = document.getElementById('player');
-            player.style.transform = `translate(${y}px, ${x}px)`;
-        });
+window.addEventListener('deviceorientation', function(event) {
+    var x = event.beta;
+    var y = event.gamma;
+
+
+    var movementSpeedX = x * 2;
+    var movementSpeedY = y * 2;
+
+    var player = document.getElementById('player');
+
+    var newX = player.offsetLeft + movementSpeedX;
+    var newY = player.offsetTop + movementSpeedY;
+
+    player.style.left = newX + 'px';
+    player.style.top = newY + 'px';
+});
     </script>
 </body>
 </html>
