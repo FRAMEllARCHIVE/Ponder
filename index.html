@@ -8,18 +8,21 @@
         body {
             margin: 0;
             overflow: hidden;
-            background: url("assets/menu3.gif") no-repeat center center fixed;
-            background-size: cover;
+            background: black url("assets/menu3.gif") no-repeat center center fixed;
+            background-size: 40%;
         }
 
         #player {
             position: absolute;
+            width: 10%;
         }
         
         #fullscreen-button {
             position: absolute;
-            top: 10px;
-            left: 10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
             cursor: pointer;
         }
@@ -27,17 +30,15 @@
 </head>
 <body>
     <img id="player" src="assets/wisp.gif" alt="Player">
-    <div id="fullscreen-button" onclick="toggleFullscreen()">Fullscreen</div>
+    <div id="fullscreen-button" onclick="toggleFullscreen()"></div>
 
     <script>
-        // Function to toggle fullscreen mode
         function toggleFullscreen() {
             if (document.documentElement.requestFullscreen) {
                 if (document.fullscreenElement) {
                     document.exitFullscreen();
                 } else {
                     document.documentElement.requestFullscreen().then(() => {
-                        // Lock screen orientation to landscape
                         if (screen.orientation && screen.orientation.lock) {
                             screen.orientation.lock('landscape');
                         }
@@ -48,13 +49,10 @@
             }
         }
 
-        // Function to move the player using accelerometer data
         window.addEventListener('deviceorientation', function(event) {
             // Get accelerometer data
             var x = event.beta; // Up/down
             var y = event.gamma; // Left/right
-
-            // Move the player based on accelerometer data
             var player = document.getElementById('player');
             player.style.transform = `translate(${y}px, ${x}px)`;
         });
