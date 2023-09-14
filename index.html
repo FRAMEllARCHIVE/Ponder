@@ -9,12 +9,12 @@
             margin: 0;
             overflow: hidden;
             background: black url("assets/menu3.gif") no-repeat center center fixed;
-            background-size: 30%;
+            background-size: 22%;
         }
 
         #player {
             position: absolute;
-            width: 5%;
+            width: 3%;
         }
         
         #fullscreen-button {
@@ -50,11 +50,10 @@
         }
 
         window.addEventListener('deviceorientation', function(event) {
-            // Get accelerometer data
             var x = event.beta; // Up/down
             var y = event.gamma; // Left/right
             var player = document.getElementById('player');
-            player.style.transform = `translate(${y}px, ${x}px)`;
+            player.style.transform = `translate(${x}px, ${y}px)`;
         });
     </script>
 </body>
