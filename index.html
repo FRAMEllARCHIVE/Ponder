@@ -12,7 +12,7 @@
             background: black url("assets/level.webp") no-repeat center center fixed;
             background-size: 88%;
         }
-
+        
         #player {
             position: absolute;
             width: 10%;
@@ -74,8 +74,8 @@
     window.addEventListener('deviceorientation', function(event) {
     var y = event.beta;
     var x = event.gamma;
-    var movementSpeedX = x * 0.1;
-    var movementSpeedY = y * 0.1;
+    var movementSpeedX = x * 0.08;
+    var movementSpeedY = y * 0.08;
     var player = document.getElementById('player');
     var newX = player.offsetLeft + movementSpeedX;
     var newY = player.offsetTop + movementSpeedY;
