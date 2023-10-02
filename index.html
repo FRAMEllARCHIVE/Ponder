@@ -49,23 +49,22 @@
     <img id="player" src="assets/wisp.gif" alt="Player">
     <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER</div>
     <script>
-        function toggleFullscreen() {
-            if (document.documentElement.requestFullscreen) {
-                if (document.fullscreenElement) {
-                    document.exitFullscreen();
-                } else {
-                    document.documentElement.requestFullscreen().then(() => {
-                        if (screen.orientation && screen.orientation.lock) {
-                            screen.orientation.lock('landscape');
-                        }
-                    }).catch(err => {
-                        console.error('Error attempting to enable fullscreen:', err);
-                    });
-                }
-            }
+function toggleFullscreen() {
+    const docElement = document.documentElement;
+    
+    if (docElement.requestFullscreen) {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            docElement.requestFullscreen().catch(err => {
+                console.error('Error attempting to enable fullscreen:', err);
+            });
+        }
+    }
 
     document.getElementById('fullscreen-button').style.display = 'none';
 }
+
 
     window.addEventListener('deviceorientation', function(event) {
     var y = event.beta;
