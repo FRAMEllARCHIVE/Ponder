@@ -11,7 +11,7 @@
             margin: 0;
             overflow: hidden;
             background: black url("assets/menu3.gif") no-repeat center center fixed;
-            background-size: 44%;
+            background-size: 88%;
         }
 
         #player {
@@ -37,7 +37,7 @@
             background-color: black;
             color: white;
             text-align: center;
-            font-size: 222px;
+            font-size: 111px;
             cursor: pointer;
             font-family: 'font', sans-serif;
             line-height: 4;
@@ -49,29 +49,28 @@
     <img id="player" src="assets/wisp.gif" alt="Player">
     <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER</div>
     <script>
-        function toggleFullscreen() {
-            if (document.documentElement.requestFullscreen) {
-                if (document.fullscreenElement) {
-                    document.exitFullscreen();
-                } else {
-                    document.documentElement.requestFullscreen().then(() => {
-                        if (screen.orientation && screen.orientation.lock) {
-                            screen.orientation.lock('landscape');
-                        }
-                    }).catch(err => {
-                        console.error('Error attempting to enable fullscreen:', err);
-                    });
-                }
-            }
-
-            document.getElementById('fullscreen-button').style.display = 'none';
+function toggleFullscreen() {
+    const docElement = document.documentElement;
+    
+    if (docElement.requestFullscreen) {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            docElement.requestFullscreen().catch(err => {
+                console.error('Error attempting to enable fullscreen:', err);
+            });
         }
+    }
 
-    window.addEventListener('deviceorientation', function(event) {
+    document.getElementById('fullscreen-button').style.display = 'none';
+}
+
+
+    window.addEventListener('fullscreenchange', function(event) {
     var y = event.beta;
     var x = event.gamma;
-    var movementSpeedX = x * 0.2;
-    var movementSpeedY = y * 0.2;
+    var movementSpeedX = x * 0.1;
+    var movementSpeedY = y * 0.1;
     var player = document.getElementById('player');
     var newX = player.offsetLeft + movementSpeedX;
     var newY = player.offsetTop + movementSpeedY;
