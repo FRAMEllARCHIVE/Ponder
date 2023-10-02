@@ -81,8 +81,6 @@
     var newY = player.offsetTop + movementSpeedY;
     var maxX = (window.innerWidth * 0.44) - player.clientWidth;
     var maxY = (window.innerHeight * 0.44) - player.clientHeight;
-    var minX = 0;
-    var minY = 0;
     newX = Math.min(Math.max(newX, 0), maxX);
     newY = Math.min(Math.max(newY, 0), maxY);
     player.style.left = newX + 'px';
