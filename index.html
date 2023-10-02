@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PONDER</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Your+Pixelated+Font" />
     <style>
 
         body {
@@ -81,9 +80,14 @@ function toggleFullscreen() {
     var player = document.getElementById('player');
     var newX = player.offsetLeft + movementSpeedX;
     var newY = player.offsetTop + movementSpeedY;
+    var maxX = window.innerWidth - player.clientWidth;
+    var maxY = window.innerHeight - player.clientHeight;
+    newX = Math.min(Math.max(newX, 0), maxX);
+    newY = Math.min(Math.max(newY, 0), maxY);
     player.style.left = newX + 'px';
     player.style.top = newY + 'px';
     });
+window.history.pushState({}, 'PONDER', '/GAME');
     </script>
 </body>
 </html>
