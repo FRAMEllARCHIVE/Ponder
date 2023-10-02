@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PONDER</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Your+Pixelated+Font" />
     <style>
+
         body {
             margin: 0;
             overflow: hidden;
@@ -15,10 +17,17 @@
         #player {
             position: absolute;
             width: 7%;
-            top: 92%;
-            left: 64%;
+            top: 50%;
+            left: 50%;
         }
-        
+
+@font-face {
+    font-family: 'font';
+    src: url('assets/font.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
         #fullscreen-button {
             position: absolute;
             top: 0;
@@ -28,18 +37,17 @@
             background-color: black;
             color: white;
             text-align: center;
-            font-size: 66px;
+            font-size: 222px;
             cursor: pointer;
-            font-family: sans-serif;
-            font-weight: bold;
-            line-height: 11;
+            font-family: 'font', sans-serif;
+            line-height: 4;
         }
+
     </style>
 </head>
 <body>
     <img id="player" src="assets/wisp.gif" alt="Player">
     <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER</div>
-
     <script>
         function toggleFullscreen() {
             if (document.documentElement.requestFullscreen) {
@@ -59,7 +67,7 @@
             document.getElementById('fullscreen-button').style.display = 'none';
         }
 
-window.addEventListener('deviceorientation', function(event) {
+    window.addEventListener('deviceorientation', function(event) {
     var x = event.beta;
     var y = event.gamma;
     var movementSpeedX = x * 0.2;
@@ -69,7 +77,7 @@ window.addEventListener('deviceorientation', function(event) {
     var newY = player.offsetTop + movementSpeedY;
     player.style.left = newX + 'px';
     player.style.top = newY + 'px';
-});
+    });
     </script>
 </body>
 </html>
