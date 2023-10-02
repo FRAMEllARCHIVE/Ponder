@@ -10,7 +10,7 @@
             margin: 0;
             overflow: hidden;
             background: black url("assets/level.webp") no-repeat center center fixed;
-            background-size: 44%;
+            background-size: 88%;
         }
 
         #player {
@@ -42,14 +42,6 @@
             line-height: 4;
         }
 
-        @media (max-width: 768px) {
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: black url("assets/level.webp") no-repeat center center fixed;
-            background-size: 88%;
-        }
-
     </style>
 </head>
 <body>
@@ -79,8 +71,7 @@
 
     document.getElementById('fullscreen-button').style.display = 'none';
 }
-
-
+        
     window.addEventListener('deviceorientation', function(event) {
     var y = event.beta;
     var x = event.gamma;
