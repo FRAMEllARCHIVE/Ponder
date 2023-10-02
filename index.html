@@ -59,7 +59,6 @@
                 console.error('Error attempting to enable fullscreen:', err);
             });
 
-            // Lock the screen to portrait mode
             if (screen.orientation && screen.orientation.lock) {
                 screen.orientation.lock("portrait").catch(function(error) {
                     console.error("Could not lock screen orientation: " + error);
