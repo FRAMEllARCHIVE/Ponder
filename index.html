@@ -56,7 +56,8 @@
     <img id="player" src="assets/wisp.gif" alt="Player">
     <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER</div>
     <script>
-function toggleFullscreen() {
+
+        function toggleFullscreen() {
     const docElement = document.documentElement;
     
     if (docElement.requestFullscreen) {
@@ -66,11 +67,19 @@ function toggleFullscreen() {
             docElement.requestFullscreen().catch(err => {
                 console.error('Error attempting to enable fullscreen:', err);
             });
+
+            // Lock the screen to portrait mode
+            if (screen.orientation && screen.orientation.lock) {
+                screen.orientation.lock("portrait").catch(function(error) {
+                    console.error("Could not lock screen orientation: " + error);
+                });
+            }
         }
     }
 
     document.getElementById('fullscreen-button').style.display = 'none';
 }
+
 
     window.addEventListener('deviceorientation', function(event) {
     var y = event.beta;
