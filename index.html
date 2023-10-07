@@ -5,27 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PONDER</title>
     <style>
-        
         body {
             margin: 0;
             overflow: hidden;
             background: black url("assets/level.webp") no-repeat center center fixed;
             background-size: 88%;
         }
-        
+
         #player {
             position: absolute;
             width: 10%;
             top: 50%;
             left: 50%;
+            transform: translate(-50%, -50%);
         }
 
-@font-face {
-    font-family: 'font';
-    src: url('assets/font.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+        @font-face {
+            font-family: 'font';
+            src: url('assets/font.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         #fullscreen-button {
             position: absolute;
             top: 0;
@@ -39,47 +40,53 @@
             cursor: pointer;
             font-family: 'font', sans-serif;
             line-height: 4;
+            z-index: 999;
         }
-
     </style>
 </head>
 <body>
     <img id="player" src="assets/wisp.gif" alt="Player">
     <div id="fullscreen-button" onclick="toggleFullscreen()">PONDER</div>
     <script>
-
         function toggleFullscreen() {
-    const docElement = document.documentElement;
-    
-    if (docElement.requestFullscreen) {
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else {
-            docElement.requestFullscreen().catch(err => {
-                console.error('Error attempting to enable fullscreen:', err);
-            });
-        }
-    }
+            const docElement = document.documentElement;
 
-    document.getElementById('fullscreen-button').style.display = 'none';
-}
-        
-    window.addEventListener('deviceorientation', function(event) {
-    var y = event.beta;
-    var x = event.gamma;
-    var movementSpeedX = x * 0.1;
-    var movementSpeedY = y * 0.1;
-    var player = document.getElementById('player');
-    var newX = player.offsetLeft + movementSpeedX;
-    var newY = player.offsetTop + movementSpeedY;
-    var maxX = window.innerWidth - player.clientWidth;
-    var maxY = window.innerHeight - player.clientHeight;
-    newX = Math.min(Math.max(newX, 0), maxX);
-    newY = Math.min(Math.max(newY, 0), maxY);
-    player.style.left = newX + 'px';
-    player.style.top = newY + 'px';
-    });
-window.history.pushState({}, 'PONDER', '/GAME');
+            if (docElement.requestFullscreen) {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    docElement.requestFullscreen().catch(err => {
+                        console.error('Error attempting to enable fullscreen:', err);
+                    });
+                }
+            }
+
+            document.getElementById('fullscreen-button').style.display = 'none';
+        }
+
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', function(event) {
+                var y = event.beta;
+                var x = event.gamma;
+                var movementSpeedX = x * 0.1;
+                var movementSpeedY = y * 0.1;
+                var player = document.getElementById('player');
+                var newX = player.offsetLeft + movementSpeedX;
+                var newY = player.offsetTop + movementSpeedY;
+                var maxX = window.innerWidth - player.clientWidth;
+                var maxY = window.innerHeight - player.clientHeight;
+                newX = Math.min(Math.max(newX, 0), maxX);
+                newY = Math.min(Math.max(newY, 0), maxY);
+                player.style.left = newX + 'px';
+                player.style.top = newY + 'px';
+            });
+        } else {
+            alert("Device orientation is not supported on this device.");
+        }
+        if (!document.documentElement.requestFullscreen) {
+            document.getElementById('fullscreen-button').style.display = 'none';
+        }
+        window.history.pushState({}, 'PONDER', '/GAME');
     </script>
 </body>
 </html>
