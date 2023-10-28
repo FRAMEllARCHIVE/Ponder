@@ -20,6 +20,7 @@ body {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+opacity:88%;
         }
 
         @font-face {
@@ -164,8 +165,10 @@ startRecognition();
                 var player = document.getElementById('player');
                 var newX = player.offsetLeft + movementSpeedX;
                 var newY = player.offsetTop + movementSpeedY;
-  newX = Math.max(squareX, Math.min(newX, squareX + squareSize));
-  newY = Math.max(squareY, Math.min(newY, squareY + squareSize));
+                var maxX = window.innerWidth - player.clientWidth;
+                var maxY = window.innerHeight - player.clientHeight;
+                newX = Math.min(Math.max(newX, 0), maxX);
+                newY = Math.min(Math.max(newY, 0), maxY);
                 player.style.left = newX + 'px';
                 player.style.top = newY + 'px';
             });
