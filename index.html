@@ -12,7 +12,6 @@ body {
   background: black url("assets/level.webp") no-repeat center center fixed;
   background-size: contain;
   background-position: center center;
-  max-height: 94%;
 }
 
         #player {
@@ -77,7 +76,7 @@ body {
 </head>
 <body>
     <img id="player" src="assets/wisp.gif" alt="Player">
-    <div id="fullscreen-button" onclick="toggleFullscreenAndPlayAudio()"><br>---<br>PONDER<br>---</div>
+    <div id="fullscreen-button" onclick="toggleFullscreenAndPlayAudio()"><br><br>PONDER</div>
 
     <audio preload="auto" loop id="audio">
         <source src="song.mp3" type="audio/mpeg">
@@ -89,42 +88,50 @@ body {
     <p id="transcript"></p>
 
 
-
     <script>
 
 //AUDIO2TEXT
 
-        let recognition;
-        const transcriptElement = document.getElementById('transcript');
-        const startRecordingButton = document.getElementById('startRecording');
-        const stopRecordingButton = document.getElementById('stopRecording');
+let recognition;
+const transcriptElement = document.getElementById('transcript');
+const startRecordingButton = document.getElementById('startRecording');
+const stopRecordingButton = document.getElementById('stopRecording');
 
-        startRecordingButton.addEventListener('click', () => {
-            recognition = new webkitSpeechRecognition();
-            recognition.continuous = true;
-            recognition.interimResults = true;
-            recognition.onresult = (event) => {
-                let transcript = '';
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    if (event.results[i].isFinal) {
-                        transcript += event.results[i][0].transcript;
-                    }
-                }
-                transcriptElement.textContent = transcript;
-            };
+function startRecognition() {
+    recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    
+    recognition.onresult = (event) => {
+        let transcript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+            if (event.results[i].isFinal) {
+                transcript += event.results[i][0].transcript;
+            }
+        }
+        transcriptElement.textContent = transcript;
+    };
 
-recognition.onend = () => {
-    startRecordingButton.style.display = 'block';
+    recognition.onend = () => {
+        startRecognition(); // Restart recognition when it ends
+    };
+
+    recognition.start();
+    startRecordingButton.style.display = 'none';
+}
+
+startRecordingButton.addEventListener('click', () => {
+    startRecognition();
+    stopRecordingButton.style.display = 'block';
+});
+
+stopRecordingButton.addEventListener('click', () => {
+    recognition.stop();
     stopRecordingButton.style.display = 'none';
-};
+});
 
-            recognition.start();
-            startRecordingButton.style.display = 'none';
-        });
-
-        stopRecordingButton.addEventListener('click', () => {
-            recognition.stop();
-        });
+// Initialize speech recognition on page load
+startRecognition();
 
 
 //INITIALIZE 
