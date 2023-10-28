@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PONDER</title>
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: black url("assets/level.webp") no-repeat center center fixed;
-            background-size: 88%;
-        }
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: black url("assets/level.webp") no-repeat center center fixed;
+  background-size: contain;
+  background-position: center center;
+  max-height: 94%;
+}
 
         #player {
             position: absolute;
@@ -39,7 +42,6 @@
             font-size: 111px;
             cursor: pointer;
             font-family: 'font', sans-serif;
-            line-height: 4;
             z-index: 999;
         }
 
@@ -55,36 +57,33 @@
             font-size: 111px;
             cursor: pointer;
             font-family: 'font', sans-serif;
-            line-height: 4;
             z-index: 999;
 }
 
 #transcript {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%);
             background-color: transparent;
             color: white;
             text-align: center;
-            font-size: 44px;
+            font-size: 2.2rem;
             cursor: pointer;
             font-family: 'font', sans-serif;
-            line-height: 1;
             z-index: 100;
 }
     </style>
 </head>
 <body>
     <img id="player" src="assets/wisp.gif" alt="Player">
-    <div id="fullscreen-button" onclick="toggleFullscreenAndPlayAudio()">PONDER</div>
+    <div id="fullscreen-button" onclick="toggleFullscreenAndPlayAudio()"><br>---<br>PONDER<br>---</div>
 
     <audio preload="auto" loop id="audio">
         <source src="song.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="startRecording">Start Recording</button>
+    <button id="startRecording">SUDO <br> CAT</button>
     <button id="stopRecording" style="display: none;">Stop Recording</button>
 
     <p id="transcript"></p>
